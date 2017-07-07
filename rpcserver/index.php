@@ -6,7 +6,7 @@ try {
     $rpc = new App\Services\Builder(Illuminate\Http\Request::capture()->path());
     $rpc->run();
 
-} catch (App\Services\Exceptions\ServerUndefinedException $e) {
+} catch (App\Exceptions\ServerUndefinedException $e) {
     // 服务未定义
     exit($e->getMessage());
 } catch (Exceptions $e) {
