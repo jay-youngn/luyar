@@ -84,7 +84,7 @@ return [
 
 `查看文档` 直接get访问 [domain]/models/user 页面，将看到server类中的public方法以及注释
 
-![server-index](https://github.com/ginnerpeace/luyar/blob/master/storage/app/yar-server-doc.png)
+![server-index](https://github.com/ginnerpeace/luyar/blob/master/resources/yar-server-doc.png)
 
 `客户端调用`
 ```php
