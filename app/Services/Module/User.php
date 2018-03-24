@@ -13,8 +13,6 @@ class User extends BaseServer
     /**
      * 创建用户
      *
-     * @author gjy <ginnerpeace@live.com>
-     *
      * @param  array $user
      * @return array
      */

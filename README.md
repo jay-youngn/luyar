@@ -1,9 +1,9 @@
 # luyar
-yar with lumen
+在Lumen框架中集成Yar扩展的示例。
 
 ### 快速开始
 
-1. 部署项目，配置nginx到项目中的rpcserver文件夹中, index file: index.php
+1. 部署项目，配置nginx
 ```
 
 server
@@ -29,31 +29,31 @@ server
 ```php
 <?php
 
-namespace App\Services\Model;
+namespace App\Services\Module;
 
 use App\Services\BaseServer;
 
 /**
- * 用户相关
+ * 用户模块
  */
 class User extends BaseServer
 {
 
     /**
-     * 创建用户(示例)
-     * @author gjy <ginnerpeace@live.com>
+     * 创建用户
      *
      * @param  array $user
      * @return array
      */
-    public static function create(array $user): array
+    public function create(array $user): array
     {
-        // 代码逻辑
-        // \DB::table('user')->insert($user);
-        //
-        return static::renderResponse($user);
-    }
+        // 返回值示例
+        return $this->response($user);
 
+        // 业务代码示例
+        $userModel = UserModel::create($user);
+        return $this->response($userModel->attributesToArray());
+    }
 }
 
 ```
@@ -67,15 +67,15 @@ class User extends BaseServer
  * path路径表示请求地址后的uri
  *
  * 如:
- *     'models/user' => App\Services\Model\User::class
+ *     'module/user' => App\Services\Module\User::class
  *
  * 表示:
- *     $client = new \Yar_Client('http://127.0.0.1:81/models/user');
- *     $client对象可使用 App\Services\Model\User 中的所有公共方法
+ *     $client = new \Yar_Client('http://127.0.0.1:81/module/user');
+ *     $client对象可调用 App\Services\Module\User 中的所有公共方法
  */
 return [
     'path' => [
-        'models/user' => App\Services\Model\User::class,
+        'module/user' => App\Services\Module\User::class,
     ],
 ];
 
@@ -83,7 +83,7 @@ return [
 
 ### 使用
 
-`查看文档` 直接get访问 [domain]/models/user 页面，将看到server类中的public方法以及注释
+`查看文档` 直接get访问 [domain]/module/user 页面，将看到server类中的public方法以及注释
 
 ![server-index](https://github.com/ginnerpeace/luyar/blob/master/resources/yar-server-doc.png)
 
@@ -91,7 +91,7 @@ return [
 ```php
 <?php
 
-$client = new \Yar_Client('http://rpc.lumen.local/models/user');
+$client = new \Yar_Client('http://rpc.lumen.local/module/user');
 
 $client->ping()；
 // string 'pong' (length=4)
