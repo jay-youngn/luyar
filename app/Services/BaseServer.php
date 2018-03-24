@@ -36,11 +36,11 @@ abstract class BaseServer
      * @param  integer $code
      * @return array
      */
-    protected static function renderResponse($data = null, int $code = 0): array
+    protected function response($data = null, int $code = 0): array
     {
         return [
-            'code' => $code,
-            'data' => $data,
+            'code'  => $code,
+            'data'  => $data,
             'error' => 0,
         ];
     }
@@ -53,11 +53,11 @@ abstract class BaseServer
      * @param  mixed $data
      * @return array
      */
-    protected static function renderError(int $code = 1, int $error = 1, $data = null): array
+    protected function error(int $code = 1, int $error = 1, $data = null): array
     {
         return [
-            'code' => $code,
-            'data' => $data,
+            'code'  => $code,
+            'data'  => $data,
             'error' => $error,
         ];
     }
@@ -68,14 +68,14 @@ abstract class BaseServer
      * @param  Exception $exception
      * @return array
      */
-    protected static function renderException(Exception $exception)
+    protected function exception(Exception $exception)
     {
         return [
             'message' => $exception->getMessage(),
-            'code' => $exception->getCode(),
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine(),
-            '_type' => get_class($exception),
+            'code'    => $exception->getCode(),
+            'file'    => $exception->getFile(),
+            'line'    => $exception->getLine(),
+            '_type'   => get_class($exception),
         ];
     }
 

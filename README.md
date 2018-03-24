@@ -5,11 +5,12 @@ yar with lumen
 
 1. 部署项目，配置nginx到项目中的rpcserver文件夹中, index file: index.php
 ```
+
 server
 {
     listen 80;
     #listen [::]:80;
-    server_name rpc.lumen.dev;
+    server_name rpc.lumen.local;
 
     index index.php;
     root  /home/ginnerpeace/running/luyar/rpcserver;
@@ -19,7 +20,7 @@ server
     # 省略fastcgi_params
     include enable-php-pathinfo.conf;
 
-    access_log  /var/wwwlogs/rpc.lumen.dev.log;
+    access_log  /var/wwwlogs/rpc.lumen.local.log;
 }
 
 ```
@@ -88,18 +89,20 @@ return [
 
 `客户端调用`
 ```php
-$client = new \Yar_Client('http://rpc.lumen.dev/models/user');
+<?php
+
+$client = new \Yar_Client('http://rpc.lumen.local/models/user');
 
 $client->ping()；
 // string 'pong' (length=4)
 
-$client->create(['name' => 'xxx', 'mobile' => '11111111111'])；
+$client->create(['name' => '示例用户', 'mobile' => '11111111111'])；
 /*
 array (size=3)
   'code' => int 0
   'data' =>
     array (size=2)
-      'name' => string 'xxx' (length=3)
+      'name' => string '示例用户' (length=3)
       'mobile' => string '11111111111' (length=11)
   'error' => int 0
 */
